@@ -1,24 +1,12 @@
 import Link from "next/link";
 import { ArrowRight, Eye, LockKeyhole } from "lucide-react";
-
-function Logo() {
-  return (
-    <Link className="brand auth-brand" href="/" aria-label="MedOptio home">
-      <span className="brand-mark" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-      </span>
-      <span>MedOptio</span>
-    </Link>
-  );
-}
+import { BrandLogo } from "../components/Brand";
 
 export default function SignInPage() {
   return (
     <main className="auth-page">
       <section className="auth-quote">
-        <Logo />
+        <BrandLogo className="auth-brand" />
         <div>
           <p>
             “Medication work should feel reviewable. MedOptio gives every
@@ -55,7 +43,7 @@ export default function SignInPage() {
             Continue <ArrowRight size={17} />
           </button>
           <small>
-            Need access? <Link href="/#contact">Request a demo</Link>
+            Need access? <Link href="/demo">Request a demo</Link>
           </small>
         </form>
       </section>

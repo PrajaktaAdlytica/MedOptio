@@ -6,32 +6,17 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowRight,
-  AtSign,
   BadgeCheck,
   Bell,
-  CalendarClock,
   Check,
   ChevronRight,
-  ClipboardCheck,
-  Database,
-  FileClock,
-  LineChart,
-  LockKeyhole,
-  Mail,
-  MapPin,
-  MessageCircle,
-  Pill,
-  Phone,
-  RefreshCcw,
   Search,
-  Send,
-  ShieldCheck,
   Sparkles,
-  Stethoscope,
-  UsersRound,
-  Globe2,
 } from "lucide-react";
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { DemoForm } from "./components/DemoForm";
+import { SiteFooter, SiteHeader } from "./components/SiteChrome";
+import { integrationItems, productList, useCases } from "./content";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,36 +27,6 @@ const proofLabels = [
   "Digital Health",
   "Clinical Ops",
   "EU Teams",
-];
-
-const productModules = [
-  {
-    name: "MedOptio Review",
-    label: "Structured profile preparation",
-    copy: "Medication histories, potential issues, missing context, and source notes prepared for professional review.",
-    stat: "42",
-    statLabel: "reviews queued",
-    accent: "plum",
-    icon: ClipboardCheck,
-  },
-  {
-    name: "MedOptio Refill",
-    label: "Authorization-ready request flow",
-    copy: "Completeness checks, communication history, policy review, and decision logs keep refill work moving.",
-    stat: "18",
-    statLabel: "requests ready",
-    accent: "terracotta",
-    icon: RefreshCcw,
-  },
-  {
-    name: "MedOptio Care",
-    label: "Follow-up orchestration",
-    copy: "Outreach timelines, response tracking, escalations, outcomes, and next actions in one calm workspace.",
-    stat: "31",
-    statLabel: "follow-ups due",
-    accent: "sage",
-    icon: MessageCircle,
-  },
 ];
 
 const stickySteps = [
@@ -103,58 +58,6 @@ const mathRows = [
   ["Follow-ups completed within target window", "91%", "Tracked across pharmacy, clinic, and care-home worklists"],
   ["Audit events captured per workflow", "100%", "Ownership, sources, status changes, and professional review notes preserved"],
 ];
-
-const useCases = [
-  {
-    role: "Pharmacy groups",
-    line: "Multi-site queues for review, refill, and follow-up work.",
-    location: "Apteka Saska Kepa · ul. Francuska 31, Warszawa",
-    insight:
-      "Multi-site teams can see which medication reviews are prepared, which refill requests are blocked, and who owns each follow-up before work moves between branches.",
-    proof: "12 prepared reviews · 4 refill blockers · 8 follow-ups due",
-    icon: Pill,
-  },
-  {
-    role: "Clinics",
-    line: "Complete refill context before authorized staff review.",
-    location: "Klinika Wola · ul. Kasprzaka 18, Warszawa",
-    insight:
-      "Clinic teams receive refill requests with missing information, source context, and previous outreach history already organized for the responsible professional.",
-    proof: "24% fewer requests opened without context",
-    icon: Stethoscope,
-  },
-  {
-    role: "Care homes",
-    line: "Resident medication actions with ownership and escalation.",
-    location: "Dom Opieki Magnolia · ul. Dluga 12, Krakow",
-    insight:
-      "Care-home coordinators can track resident medication changes, review ownership, escalations, and family or clinician follow-up without rebuilding the record.",
-    proof: "91% follow-ups completed inside target window",
-    icon: UsersRound,
-  },
-  {
-    role: "Digital health",
-    line: "Workflow and audit infrastructure for medication services.",
-    location: "Zdrowie Online · ul. Piekna 22, Wroclaw",
-    insight:
-      "Digital health providers can add medication operations, audit history, and professional review states around the clinical systems already in use.",
-    proof: "100% workflow actions written to audit history",
-    icon: Database,
-  },
-];
-
-function Logo() {
-  return (
-    <Link className="brand" href="/" aria-label="MedOptio home">
-      <span className="brand-mark" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-      </span>
-      <span>MedOptio</span>
-    </Link>
-  );
-}
 
 function StatusChip({
   children,
@@ -305,58 +208,10 @@ function ProductWorkspace({ activeStep }: { activeStep: number }) {
   );
 }
 
-function DemoForm() {
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSubmitted(true);
-  }
-
-  return (
-    <form className="demo-form" onSubmit={handleSubmit}>
-      <label>
-        Work email
-        <input required type="email" placeholder="anna@apteka-saska.pl" />
-      </label>
-      <label>
-        Name
-        <input required placeholder="Anna Kowalska" />
-      </label>
-      <label>
-        Organization
-        <input required placeholder="Warsaw Outpatient Group" />
-      </label>
-      <label>
-        Organization type
-        <select defaultValue="Pharmacy group">
-          <option>Pharmacy group</option>
-          <option>Clinic</option>
-          <option>Care home</option>
-          <option>Digital health provider</option>
-        </select>
-      </label>
-      <label className="full">
-        Medication workflow priority
-        <textarea placeholder="Tell us about reviews, refills, follow-ups, or audit workflows you want to improve." />
-      </label>
-      <button className="button primary full" type="submit">
-        {submitted ? "Demo request noted" : "Request a Demo"}
-        <ArrowRight size={17} />
-      </button>
-      {submitted ? (
-        <p className="form-success">
-          Thanks. The demo flow is mocked for now, but the form is ready for backend wiring.
-        </p>
-      ) : null}
-    </form>
-  );
-}
-
 export function MedOptioHome() {
   const [activeStep, setActiveStep] = useState(0);
   const [activeCase, setActiveCase] = useState(0);
-  const modules = useMemo(() => productModules, []);
+  const modules = useMemo(() => productList, []);
   const selectedCase = useCases[activeCase];
 
   useEffect(() => {
@@ -517,23 +372,7 @@ export function MedOptioHome() {
 
   return (
     <main>
-      <header className="nav-shell">
-        <Logo />
-        <nav aria-label="Main navigation">
-          <a href="#product">Product</a>
-          <a href="#review">Review</a>
-          <a href="#refill">Refill</a>
-          <a href="#care">Care</a>
-          <a href="#use-cases">Use Cases</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <div className="nav-actions">
-          <Link href="/sign-in">Sign in</Link>
-          <a className="button primary small" href="#contact">
-            Request a Demo
-          </a>
-        </div>
-      </header>
+      <SiteHeader />
 
       <section className="hero" id="top">
         <div className="hero-copy">
@@ -545,12 +384,12 @@ export function MedOptioHome() {
             one calm, structured workflow.
           </p>
           <div className="hero-actions">
-            <a className="button primary" href="#contact">
+            <Link className="button primary" href="/demo">
               Request a Demo <ArrowRight size={18} />
-            </a>
-            <a className="button secondary" href="#product">
+            </Link>
+            <Link className="button secondary" href="/products/review">
               Explore Platform
-            </a>
+            </Link>
           </div>
           <div className="hero-note">
             <BadgeCheck size={18} />
@@ -628,16 +467,16 @@ export function MedOptioHome() {
                 <div className="module-art">
                   <Icon size={24} />
                   <div>
-                    <strong>{module.stat}</strong>
-                    <span>{module.statLabel}</span>
+                    <strong>{module.metric}</strong>
+                    <span>{module.metricLabel}</span>
                   </div>
                 </div>
-                <span>{module.label}</span>
+                <span>{module.eyebrow}</span>
                 <h3>{module.name}</h3>
-                <p>{module.copy}</p>
-                <button type="button">
+                <p>{module.summary}</p>
+                <Link href={module.path}>
                   View workflow <ArrowRight size={15} />
-                </button>
+                </Link>
               </article>
             );
           })}
@@ -718,14 +557,7 @@ export function MedOptioHome() {
           </p>
         </div>
         <div className="integration-grid" aria-label="Integration categories">
-          {[
-            [FileClock, "Dispensing software"],
-            [ShieldCheck, "EHR context"],
-            [MessageCircle, "Patient messaging"],
-            [CalendarClock, "Task calendars"],
-            [LineChart, "Reporting"],
-            [LockKeyhole, "Identity access"],
-          ].map(([Icon, label]) => (
+          {integrationItems.map(([Icon, label]) => (
             <span key={label as string}>
               <Icon size={22} />
               {label as string}
@@ -776,54 +608,7 @@ export function MedOptioHome() {
         <DemoForm />
       </section>
 
-      <footer className="footer">
-        <div className="footer-brand">
-          <Logo />
-          <p>
-            Medication workflow infrastructure for Polish and EU pharmacy,
-            clinic, care-home, and digital health teams.
-          </p>
-          <div className="social-links" aria-label="MedOptio social links">
-            <a href="https://www.linkedin.com/company/medoptio" aria-label="MedOptio on LinkedIn">
-              <Globe2 size={18} />
-            </a>
-            <a href="https://www.instagram.com/medoptio" aria-label="MedOptio on Instagram">
-              <AtSign size={18} />
-            </a>
-            <a href="https://www.youtube.com/@medoptio" aria-label="MedOptio on YouTube">
-              <Send size={18} />
-            </a>
-          </div>
-        </div>
-        <div>
-          <strong>Product</strong>
-          <a href="#review">Review</a>
-          <a href="#refill">Refill</a>
-          <a href="#care">Care</a>
-        </div>
-        <div>
-          <strong>Use Cases</strong>
-          <a href="#use-cases">Pharmacies</a>
-          <a href="#use-cases">Clinics</a>
-          <a href="#use-cases">Care Homes</a>
-        </div>
-        <div>
-          <strong>Contact</strong>
-          <a href="mailto:hello@medoptio.com">
-            <Mail size={15} />
-            hello@medoptio.com
-          </a>
-          <a href="tel:+48221030240">
-            <Phone size={15} />
-            +48 22 103 02 40
-          </a>
-          <span>
-            <MapPin size={15} />
-            ul. Prosta 20, 00-850 Warszawa
-          </span>
-          <Link href="/sign-in">Sign in</Link>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
