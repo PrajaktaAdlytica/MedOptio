@@ -1,0 +1,29 @@
+<svg width="520" height="128" viewBox="0 0 520 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M60.56 108.12C37.74 104.4 20.72 84.21 20.72 60.36V41.34C41.86 43.13 57.8 58.4 60.56 78.33V108.12Z" fill="url(#left-petal)"/>
+  <path d="M67.44 108.12C90.26 104.4 107.28 84.21 107.28 60.36V41.34C86.14 43.13 70.2 58.4 67.44 78.33V108.12Z" fill="url(#right-petal)"/>
+  <path d="M64 108.6V74.6" stroke="#A78FAE" stroke-width="3.6" stroke-linecap="round"/>
+  <circle cx="64" cy="26.04" r="16.12" fill="url(#sun)"/>
+  <text
+    x="140"
+    y="82"
+    fill="#2B2730"
+    font-family="Inter, Avenir Next, Helvetica Neue, Arial, sans-serif"
+    font-size="56"
+    font-weight="500"
+    letter-spacing="-1"
+  >MedOptio</text>
+  <defs>
+    <linearGradient id="left-petal" x1="19.19" x2="67.24" y1="42.53" y2="98.56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9F819C"/>
+      <stop offset="1" stop-color="#DCC8D8"/>
+    </linearGradient>
+    <linearGradient id="right-petal" x1="108.81" x2="60.76" y1="42.53" y2="98.56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8F789A"/>
+      <stop offset="1" stop-color="#D7C3D4"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="50.96" x2="78.32" y1="13.36" y2="41.08" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F2C8B8"/>
+      <stop offset="1" stop-color="#E9A68E"/>
+    </linearGradient>
+  </defs>
+</svg>

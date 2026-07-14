@@ -1,6 +1,21 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="64" height="64" rx="18" fill="#2B2730"/>
-  <path d="M18 27C18 38 25.4 45.5 32 47V24C25 24 20.8 24.8 18 27Z" fill="#DCC8D8"/>
-  <path d="M46 27C46 38 38.6 45.5 32 47V24C39 24 43.2 24.8 46 27Z" fill="#B8A4C9"/>
-  <circle cx="32" cy="17" r="7" fill="#E9A68E"/>
+  <path d="M30.32 51.72C20.14 50.06 12.56 41.05 12.56 30.4V21.91C21.97 22.7 29.05 29.5 30.32 38.35V51.72Z" fill="url(#left-petal)"/>
+  <path d="M33.68 51.72C43.86 50.06 51.44 41.05 51.44 30.4V21.91C42.03 22.7 34.95 29.5 33.68 38.35V51.72Z" fill="url(#right-petal)"/>
+  <path d="M32 52V36.95" stroke="#A78FAE" stroke-width="1.8" stroke-linecap="round"/>
+  <circle cx="32" cy="14.35" r="7.45" fill="url(#sun)"/>
+  <defs>
+    <linearGradient id="left-petal" x1="11.88" x2="33.31" y1="22.43" y2="47.18" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9F819C"/>
+      <stop offset="1" stop-color="#DCC8D8"/>
+    </linearGradient>
+    <linearGradient id="right-petal" x1="52.12" x2="30.69" y1="22.43" y2="47.18" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8F789A"/>
+      <stop offset="1" stop-color="#D7C3D4"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="25.98" x2="38.6" y1="8.49" y2="21.25" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F2C8B8"/>
+      <stop offset="1" stop-color="#E9A68E"/>
+    </linearGradient>
+  </defs>
 </svg>

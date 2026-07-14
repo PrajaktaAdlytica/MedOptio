@@ -22,9 +22,14 @@ export const metadata: Metadata = {
   description:
     "MedOptio is a human-supervised medication operations platform for pharmacy, clinic, care-home, and digital health teams.",
   icons: {
-    icon: "/favicon.svg",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
     shortcut: "/favicon.svg",
+    apple: "/apple-touch-icon.png",
   },
+  manifest: "/site.webmanifest",
   openGraph: {
     title: "MedOptio",
     description:

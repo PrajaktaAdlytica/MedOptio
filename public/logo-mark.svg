@@ -1,0 +1,20 @@
+<svg width="168" height="168" viewBox="0 0 168 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M79.28 148.32C47.6 143.16 24 115.12 24 82V55.6C53.36 58.08 75.48 79.28 79.28 106.96V148.32Z" fill="url(#left-petal)"/>
+  <path d="M88.72 148.32C120.4 143.16 144 115.12 144 82V55.6C114.64 58.08 92.52 79.28 88.72 106.96V148.32Z" fill="url(#right-petal)"/>
+  <path d="M84 149V101.8" stroke="#A78FAE" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="84" cy="34.4" r="22.4" fill="url(#sun)"/>
+  <defs>
+    <linearGradient id="left-petal" x1="21.88" x2="88.32" y1="57.24" y2="135.12" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9F819C"/>
+      <stop offset="1" stop-color="#DCC8D8"/>
+    </linearGradient>
+    <linearGradient id="right-petal" x1="146.12" x2="79.68" y1="57.24" y2="135.12" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8F789A"/>
+      <stop offset="1" stop-color="#D7C3D4"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="65.88" x2="103.88" y1="16.8" y2="55.32" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F2C8B8"/>
+      <stop offset="1" stop-color="#E9A68E"/>
+    </linearGradient>
+  </defs>
+</svg>
