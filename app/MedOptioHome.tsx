@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowRight,
+  AtSign,
   BadgeCheck,
   Bell,
   CalendarClock,
@@ -16,14 +17,19 @@ import {
   FileClock,
   LineChart,
   LockKeyhole,
+  Mail,
+  MapPin,
   MessageCircle,
   Pill,
+  Phone,
   RefreshCcw,
   Search,
+  Send,
   ShieldCheck,
   Sparkles,
   Stethoscope,
   UsersRound,
+  Globe2,
 } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 
@@ -103,24 +109,36 @@ const useCases = [
     role: "Pharmacy groups",
     line: "Multi-site queues for review, refill, and follow-up work.",
     location: "Apteka Saska Kepa · ul. Francuska 31, Warszawa",
+    insight:
+      "Multi-site teams can see which medication reviews are prepared, which refill requests are blocked, and who owns each follow-up before work moves between branches.",
+    proof: "12 prepared reviews · 4 refill blockers · 8 follow-ups due",
     icon: Pill,
   },
   {
     role: "Clinics",
     line: "Complete refill context before authorized staff review.",
     location: "Klinika Wola · ul. Kasprzaka 18, Warszawa",
+    insight:
+      "Clinic teams receive refill requests with missing information, source context, and previous outreach history already organized for the responsible professional.",
+    proof: "24% fewer requests opened without context",
     icon: Stethoscope,
   },
   {
     role: "Care homes",
     line: "Resident medication actions with ownership and escalation.",
     location: "Dom Opieki Magnolia · ul. Dluga 12, Krakow",
+    insight:
+      "Care-home coordinators can track resident medication changes, review ownership, escalations, and family or clinician follow-up without rebuilding the record.",
+    proof: "91% follow-ups completed inside target window",
     icon: UsersRound,
   },
   {
     role: "Digital health",
     line: "Workflow and audit infrastructure for medication services.",
     location: "Zdrowie Online · ul. Piekna 22, Wroclaw",
+    insight:
+      "Digital health providers can add medication operations, audit history, and professional review states around the clinical systems already in use.",
+    proof: "100% workflow actions written to audit history",
     icon: Database,
   },
 ];
@@ -337,7 +355,9 @@ function DemoForm() {
 
 export function MedOptioHome() {
   const [activeStep, setActiveStep] = useState(0);
+  const [activeCase, setActiveCase] = useState(0);
   const modules = useMemo(() => productModules, []);
+  const selectedCase = useCases[activeCase];
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -380,6 +400,23 @@ export function MedOptioHome() {
         );
       });
 
+      gsap.fromTo(
+        ".fragment-lane",
+        { y: 34, opacity: 0, scale: 0.98 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.7,
+          ease: "power3.out",
+          stagger: 0.14,
+          scrollTrigger: {
+            trigger: ".fragment-map",
+            start: "top 78%",
+          },
+        },
+      );
+
       gsap.utils.toArray<HTMLElement>(".story-step").forEach((node, index) => {
         ScrollTrigger.create({
           trigger: node,
@@ -387,6 +424,26 @@ export function MedOptioHome() {
           end: "bottom center",
           onEnter: () => setActiveStep(index),
           onEnterBack: () => setActiveStep(index),
+        });
+      });
+
+      gsap.utils.toArray<HTMLElement>(".metric-value").forEach((node) => {
+        const endValue = Number(node.dataset.value ?? 0);
+        const suffix = node.dataset.suffix ?? "";
+        const counter = { value: 0 };
+
+        gsap.to(counter, {
+          value: endValue,
+          duration: 1.35,
+          ease: "power2.out",
+          onUpdate: () => {
+            node.textContent = `${Math.round(counter.value)}${suffix}`;
+          },
+          scrollTrigger: {
+            trigger: node,
+            start: "top 84%",
+            once: true,
+          },
         });
       });
 
@@ -422,6 +479,22 @@ export function MedOptioHome() {
           },
         );
       });
+
+      gsap.fromTo(
+        ".trust-checks span",
+        { y: 28, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.65,
+          ease: "power3.out",
+          stagger: 0.16,
+          scrollTrigger: {
+            trigger: ".trust-checks",
+            start: "top 78%",
+          },
+        },
+      );
 
       gsap.to(".parallax-soft", {
         yPercent: -8,
@@ -489,10 +562,19 @@ export function MedOptioHome() {
 
       <section className="proof-band" aria-label="Customer categories">
         <span>Built for medication operations across</span>
-        <div>
-          {proofLabels.map((label) => (
-            <strong key={label}>{label}</strong>
-          ))}
+        <div className="category-marquee">
+          <div className="category-track">
+            <div className="category-set">
+              {proofLabels.map((label) => (
+                <strong key={label}>{label}</strong>
+              ))}
+            </div>
+            <div className="category-set" aria-hidden="true">
+              {proofLabels.map((label) => (
+                <strong key={`${label}-repeat`}>{label}</strong>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -535,7 +617,7 @@ export function MedOptioHome() {
 
       <section className="horizontal-modules" id="review">
         <div className="horizontal-intro">
-          <span className="pill-label">Three connected products</span>
+          <span className="pill-label dark">Three connected products</span>
           <h2>Review, refill, and care work from the same patient context.</h2>
         </div>
         <div className="module-track">
@@ -574,7 +656,13 @@ export function MedOptioHome() {
                 <span>{label}</span>
                 <p>{detail}</p>
               </div>
-              <strong>{value}</strong>
+              <strong
+                className="metric-value"
+                data-value={value.replace("%", "")}
+                data-suffix={value.includes("%") ? "%" : ""}
+              >
+                {value}
+              </strong>
             </div>
           ))}
         </div>
@@ -590,7 +678,14 @@ export function MedOptioHome() {
             {useCases.map((item, index) => {
               const Icon = item.icon;
               return (
-                <article className="case-panel" key={item.role} style={{ zIndex: useCases.length - index }}>
+                <button
+                  className={`case-panel ${activeCase === index ? "active" : ""}`}
+                  key={item.role}
+                  onClick={() => setActiveCase(index)}
+                  style={{ zIndex: useCases.length - index }}
+                  type="button"
+                  aria-pressed={activeCase === index}
+                >
                   <div className="case-image">
                     <Icon size={28} />
                     <span>{item.location}</span>
@@ -599,16 +694,16 @@ export function MedOptioHome() {
                     <h3>{item.role}</h3>
                     <p>{item.line}</p>
                   </div>
-                </article>
+                </button>
               );
             })}
           </div>
-          <div className="quote-block reveal">
-            <p>
-              “What once took repeated calls, manual checks, and scattered notes
-              can now move through one structured medication workflow.”
-            </p>
-            <span>Clinical operations lead · EU pharmacy group</span>
+          <div className="quote-block reveal" aria-live="polite">
+            <span className="quote-kicker">Selected workflow</span>
+            <h3>{selectedCase.role}</h3>
+            <p>{selectedCase.insight}</p>
+            <strong>{selectedCase.proof}</strong>
+            <small>{selectedCase.location}</small>
           </div>
         </div>
       </section>
@@ -682,7 +777,24 @@ export function MedOptioHome() {
       </section>
 
       <footer className="footer">
-        <Logo />
+        <div className="footer-brand">
+          <Logo />
+          <p>
+            Medication workflow infrastructure for Polish and EU pharmacy,
+            clinic, care-home, and digital health teams.
+          </p>
+          <div className="social-links" aria-label="MedOptio social links">
+            <a href="https://www.linkedin.com/company/medoptio" aria-label="MedOptio on LinkedIn">
+              <Globe2 size={18} />
+            </a>
+            <a href="https://www.instagram.com/medoptio" aria-label="MedOptio on Instagram">
+              <AtSign size={18} />
+            </a>
+            <a href="https://www.youtube.com/@medoptio" aria-label="MedOptio on YouTube">
+              <Send size={18} />
+            </a>
+          </div>
+        </div>
         <div>
           <strong>Product</strong>
           <a href="#review">Review</a>
@@ -696,8 +808,19 @@ export function MedOptioHome() {
           <a href="#use-cases">Care Homes</a>
         </div>
         <div>
-          <strong>Company</strong>
-          <a href="#contact">Contact</a>
+          <strong>Contact</strong>
+          <a href="mailto:hello@medoptio.com">
+            <Mail size={15} />
+            hello@medoptio.com
+          </a>
+          <a href="tel:+48221030240">
+            <Phone size={15} />
+            +48 22 103 02 40
+          </a>
+          <span>
+            <MapPin size={15} />
+            ul. Prosta 20, 00-850 Warszawa
+          </span>
           <Link href="/sign-in">Sign in</Link>
         </div>
       </footer>
