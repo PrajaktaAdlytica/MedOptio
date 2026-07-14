@@ -3,6 +3,8 @@
 Premium SaaS website for MedOptio, a Poland/EU-oriented medication operations
 platform for pharmacies, clinics, care homes, and digital health providers.
 
+Live site: https://medoptio.prajakta542277.chatgpt.site
+
 ## What is included
 
 - Product-led homepage with MedOptio Review, Refill, and Care storytelling
