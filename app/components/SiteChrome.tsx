@@ -1,17 +1,41 @@
 import Link from "next/link";
-import { AtSign, Globe2, Mail, MapPin, Phone, Send } from "lucide-react";
+import { AtSign, ChevronDown, Globe2, Mail, MapPin, Phone, Send } from "lucide-react";
 import { BrandLogo } from "./Brand";
+import { productList } from "../content";
 
 export function SiteHeader() {
   return (
     <header className="nav-shell">
       <BrandLogo />
       <nav aria-label="Main navigation">
-        <Link href="/products/review">Review</Link>
-        <Link href="/products/refill">Refill</Link>
-        <Link href="/products/care">Care</Link>
+        <div className="nav-dropdown">
+          <button type="button" aria-haspopup="true">
+            Products <ChevronDown size={14} />
+          </button>
+          <div className="product-menu" role="menu">
+            {productList.map((product) => {
+              const Icon = product.icon;
+              return (
+                <Link className="product-menu-item" href={product.path} key={product.name}>
+                  <span className={`menu-icon ${product.accent}`}>
+                    <Icon size={18} />
+                  </span>
+                  <span>
+                    <strong>{product.name.replace("MedOptio ", "")}</strong>
+                    <small>{product.eyebrow}</small>
+                  </span>
+                </Link>
+              );
+            })}
+            <Link className="product-menu-cta" href="/#product">
+              View full platform flow
+            </Link>
+          </div>
+        </div>
+        <Link href="/#product">Platform</Link>
         <Link href="/#use-cases">Use Cases</Link>
         <Link href="/demo">Demo</Link>
+        <Link href="/#contact">Contact</Link>
       </nav>
       <div className="nav-actions">
         <Link href="/sign-in">Sign in</Link>
