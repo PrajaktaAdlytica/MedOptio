@@ -18,6 +18,7 @@ const mono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.medoptio.com"),
   title: "MedOptio | Medication workflows, optimized for safer care",
   description:
     "MedOptio is a human-supervised medication operations platform for pharmacy, clinic, care-home, and digital health teams.",
@@ -35,6 +36,14 @@ export const metadata: Metadata = {
     description:
       "AI-assisted review, refill, and follow-up workflows for safer medication operations.",
     type: "website",
+    url: "https://www.medoptio.com",
+    siteName: "MedOptio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MedOptio | Medication workflows, optimized for safer care",
+    description:
+      "AI-assisted review, refill, and follow-up workflows for safer medication operations.",
   },
 };
 

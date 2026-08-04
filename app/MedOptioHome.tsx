@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowRight,
+  ArrowUpRight,
   BadgeCheck,
   Bell,
   Check,
@@ -373,6 +374,19 @@ export function MedOptioHome() {
   return (
     <main>
       <SiteHeader />
+
+      <Link
+        className="funding-strip"
+        href="/news/medoptio-announces-550k-funding-from-tiphub"
+        aria-label="Read the MedOptio funding announcement"
+      >
+        <span>Company news</span>
+        <strong>MedOptio announces $550K in funding from TipHub</strong>
+        <time dateTime="2025-11-09">9 November 2025</time>
+        <span className="funding-strip-link">
+          Read announcement <ArrowUpRight size={16} />
+        </span>
+      </Link>
 
       <section className="hero" id="top">
         <div className="hero-copy">

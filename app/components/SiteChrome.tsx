@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AtSign, ChevronDown, Globe2, Mail, MapPin, Phone, Send } from "lucide-react";
+import { AtSign, BriefcaseBusiness, ChevronDown, Database, Mail, MapPin, Phone, Send } from "lucide-react";
 import { BrandLogo } from "./Brand";
 import { productList } from "../content";
 
@@ -34,6 +34,7 @@ export function SiteHeader() {
         </div>
         <Link href="/#product">Platform</Link>
         <Link href="/#use-cases">Use Cases</Link>
+        <Link href="/news/medoptio-announces-550k-funding-from-tiphub">Funding</Link>
         <Link href="/demo">Demo</Link>
         <Link href="/#contact">Contact</Link>
       </nav>
@@ -57,14 +58,27 @@ export function SiteFooter() {
           care-home, and digital health teams.
         </p>
         <div className="social-links" aria-label="MedOptio social links">
-          <a href="https://www.linkedin.com/company/medoptio" aria-label="MedOptio on LinkedIn">
-            <Globe2 size={18} />
+          <a
+            href="https://www.linkedin.com/company/medoplio/"
+            aria-label="MedOptio on LinkedIn"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <BriefcaseBusiness size={18} />
           </a>
           <a href="https://www.instagram.com/medoptio" aria-label="MedOptio on Instagram">
             <AtSign size={18} />
           </a>
           <a href="https://www.youtube.com/@medoptio" aria-label="MedOptio on YouTube">
             <Send size={18} />
+          </a>
+          <a
+            href="https://www.crunchbase.com/organization/medoptio"
+            aria-label="MedOptio on Crunchbase"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <Database size={18} />
           </a>
         </div>
       </div>
@@ -81,7 +95,9 @@ export function SiteFooter() {
         <Link href="/#use-cases">Care Homes</Link>
       </div>
       <div>
-        <strong>Contact</strong>
+        <strong>Company</strong>
+        <Link href="/news/medoptio-announces-550k-funding-from-tiphub">Funding announcement</Link>
+        <Link href="/#contact">Contact</Link>
         <a href="mailto:hello@medoptio.com">
           <Mail size={15} />
           hello@medoptio.com
