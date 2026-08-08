@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { DemoForm } from "./components/DemoForm";
+import { EntrySequence } from "./components/EntrySequence";
 import { SiteFooter, SiteHeader } from "./components/SiteChrome";
 import { integrationItems, productList, useCases } from "./content";
 
@@ -373,6 +374,7 @@ export function MedOptioHome() {
 
   return (
     <main>
+      <EntrySequence />
       <SiteHeader />
 
       <Link
