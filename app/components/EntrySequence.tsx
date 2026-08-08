@@ -1,7 +1,7 @@
 "use client";
 
-import { ArrowRight, RotateCcw, SkipForward, Volume2, VolumeX } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { ArrowDown, RotateCcw, SkipForward, Volume2, VolumeX } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { BrandLogo } from "./Brand";
 
 const entryBeats = [
@@ -24,57 +24,16 @@ const entryBeats = [
 
 export function EntrySequence() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [mode, setMode] = useState<"intro" | "docked">("intro");
   const [complete, setComplete] = useState(false);
   const [muted, setMuted] = useState(true);
   const [activeBeat, setActiveBeat] = useState(0);
 
-  const collapseIntro = useCallback(() => {
-    videoRef.current?.pause();
-    setMode("docked");
-    setComplete(true);
-    window.sessionStorage.setItem("medoptio-entry-seen", "true");
-    window.setTimeout(() => window.dispatchEvent(new Event("resize")), 420);
-  }, []);
-
   useEffect(() => {
-    if (window.sessionStorage.getItem("medoptio-entry-seen") === "true") {
-      const timeout = window.setTimeout(() => {
-        videoRef.current?.pause();
-        setMode("docked");
-        setComplete(true);
-      }, 0);
-
-      return () => window.clearTimeout(timeout);
-    }
-
     videoRef.current?.play().catch(() => setComplete(true));
   }, []);
 
-  useEffect(() => {
-    document.documentElement.classList.toggle("intro-locked", mode === "intro");
-
-    return () => document.documentElement.classList.remove("intro-locked");
-  }, [mode]);
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && mode === "intro") collapseIntro();
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [collapseIntro, mode]);
-
-  const replayIntro = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    setMode("intro");
-    setComplete(false);
-    setActiveBeat(0);
-    video.currentTime = 0;
-    video.play().catch(() => setComplete(true));
+  const enterWebsite = () => {
+    document.getElementById("top")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const replayInPlace = () => {
@@ -100,7 +59,8 @@ export function EntrySequence() {
 
   return (
     <section
-      className={`entry-sequence ${mode === "docked" ? "is-docked" : "is-intro"} ${complete ? "is-complete" : ""}`}
+      className={`entry-sequence ${complete ? "is-complete" : ""}`}
+      id="entry"
       aria-label="MedOptio introduction"
     >
       <video
@@ -129,8 +89,8 @@ export function EntrySequence() {
           >
             {muted ? <VolumeX size={18} /> : <Volume2 size={18} />}
           </button>
-          <button className="entry-skip" type="button" onClick={collapseIntro}>
-            Skip intro <SkipForward size={17} />
+          <button className="entry-skip" type="button" onClick={enterWebsite}>
+            Skip to website <SkipForward size={17} />
           </button>
         </div>
       </div>
@@ -150,21 +110,14 @@ export function EntrySequence() {
         </div>
       </div>
 
-      <div className="entry-complete-actions">
-        <button className="button entry-replay" type="button" onClick={replayInPlace}>
+      <div className="entry-complete-actions" aria-hidden={!complete}>
+        <button className="button entry-replay" type="button" onClick={replayInPlace} disabled={!complete}>
           <RotateCcw size={17} /> Watch again
         </button>
-        <button className="button entry-enter" type="button" onClick={collapseIntro}>
-          Enter MedOptio <ArrowRight size={18} />
+        <button className="button entry-enter" type="button" onClick={enterWebsite} disabled={!complete}>
+          Explore MedOptio <ArrowDown size={18} />
         </button>
       </div>
-
-      <button className="entry-dock-action" type="button" onClick={replayIntro}>
-        <span>
-          <RotateCcw size={15} /> Replay intro
-        </span>
-        <small>10 sec</small>
-      </button>
     </section>
   );
 }

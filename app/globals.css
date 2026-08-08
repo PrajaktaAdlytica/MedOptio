@@ -37,10 +37,6 @@ html {
   background: var(--porcelain);
 }
 
-html.intro-locked {
-  overflow: hidden;
-}
-
 body {
   margin: 0;
   background:
@@ -82,36 +78,15 @@ main {
 }
 
 .entry-sequence {
-  position: fixed;
+  position: relative;
+  z-index: 60;
   isolation: isolate;
+  width: 100%;
+  height: 100svh;
+  min-height: 640px;
   overflow: hidden;
   background: #17141c;
   color: var(--porcelain-2);
-  transition:
-    width 520ms cubic-bezier(0.22, 1, 0.36, 1),
-    height 520ms cubic-bezier(0.22, 1, 0.36, 1),
-    right 520ms cubic-bezier(0.22, 1, 0.36, 1),
-    bottom 520ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-radius 520ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 520ms ease;
-}
-
-.entry-sequence.is-intro {
-  inset: 0;
-  z-index: 100;
-  width: 100vw;
-  height: 100dvh;
-}
-
-.entry-sequence.is-docked {
-  right: 22px;
-  bottom: 22px;
-  z-index: 45;
-  width: 318px;
-  height: 188px;
-  border: 1px solid rgba(255, 253, 249, 0.2);
-  border-radius: 18px;
-  box-shadow: 0 24px 70px rgba(23, 20, 28, 0.28);
 }
 
 .entry-sequence video,
@@ -129,8 +104,8 @@ main {
 .entry-shade {
   z-index: 1;
   background:
-    linear-gradient(90deg, rgba(18, 17, 22, 0.78), rgba(18, 17, 22, 0.15) 56%, rgba(18, 17, 22, 0.26)),
-    linear-gradient(0deg, rgba(18, 17, 22, 0.68), transparent 48%);
+    linear-gradient(90deg, rgba(18, 17, 22, 0.66), rgba(18, 17, 22, 0.08) 48%, rgba(18, 17, 22, 0.12)),
+    linear-gradient(0deg, rgba(18, 17, 22, 0.56), transparent 42%);
   pointer-events: none;
   transition: background 300ms ease;
 }
@@ -195,7 +170,7 @@ main {
   left: clamp(34px, 7vw, 112px);
   bottom: clamp(42px, 10vh, 112px);
   z-index: 2;
-  width: min(700px, calc(100vw - 68px));
+  width: min(500px, calc(100vw - 68px));
   transition:
     opacity 220ms ease,
     transform 320ms ease;
@@ -216,21 +191,21 @@ main {
 }
 
 .entry-copy h1 {
-  max-width: 720px;
-  margin: 22px 0 0;
+  max-width: 500px;
+  margin: 18px 0 0;
   font-family: var(--font-display), system-ui, sans-serif;
-  font-size: clamp(48px, 6.2vw, 94px);
+  font-size: clamp(36px, 3.5vw, 52px);
   font-weight: 500;
-  line-height: 0.98;
+  line-height: 1.02;
   letter-spacing: 0;
   text-wrap: balance;
 }
 
 .entry-copy p {
-  max-width: 600px;
-  margin: 22px 0 0;
+  max-width: 460px;
+  margin: 18px 0 0;
   color: rgba(255, 253, 249, 0.7);
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.55;
 }
 
@@ -268,13 +243,13 @@ main {
     transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.entry-sequence.is-complete.is-intro .entry-complete-actions {
+.entry-sequence.is-complete .entry-complete-actions {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
 }
 
-.entry-sequence.is-complete.is-intro .entry-skip {
+.entry-sequence.is-complete .entry-skip {
   opacity: 0;
   pointer-events: none;
 }
@@ -294,57 +269,6 @@ main {
 .entry-enter {
   background: var(--porcelain-2);
   color: var(--espresso);
-}
-
-.entry-dock-action {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  display: flex;
-  width: 100%;
-  align-items: flex-end;
-  justify-content: space-between;
-  background: transparent;
-  color: var(--porcelain-2);
-  cursor: pointer;
-  opacity: 0;
-  padding: 16px;
-  pointer-events: none;
-  transition: opacity 220ms ease;
-}
-
-.entry-dock-action span {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.entry-dock-action small {
-  color: rgba(255, 253, 249, 0.64);
-  font-size: 11px;
-}
-
-.entry-sequence.is-docked .entry-shade {
-  background: linear-gradient(0deg, rgba(23, 20, 28, 0.84), transparent 72%);
-}
-
-.entry-sequence.is-docked .entry-topbar,
-.entry-sequence.is-docked .entry-copy,
-.entry-sequence.is-docked .entry-complete-actions {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(12px);
-}
-
-.entry-sequence.is-docked .entry-dock-action {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.entry-sequence.is-docked:hover {
-  box-shadow: 0 28px 86px rgba(23, 20, 28, 0.38);
 }
 
 .nav-shell {
@@ -2617,8 +2541,8 @@ main {
   }
 
   .entry-copy h1 {
-    font-size: clamp(42px, 12.8vw, 62px);
-    line-height: 1.01;
+    font-size: clamp(34px, 9.8vw, 46px);
+    line-height: 1.04;
   }
 
   .entry-copy p {
@@ -2639,18 +2563,6 @@ main {
     padding: 0 14px;
     font-size: 13px;
     white-space: nowrap;
-  }
-
-  .entry-sequence.is-docked {
-    right: 12px;
-    bottom: 12px;
-    width: 210px;
-    height: 124px;
-    border-radius: 14px;
-  }
-
-  .entry-dock-action {
-    padding: 12px;
   }
 
   .nav-shell nav,
