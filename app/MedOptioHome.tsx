@@ -618,7 +618,7 @@ export function MedOptioHome() {
           </p>
           <div className="address-card">
             <Sparkles size={18} />
-            <span>MedOptio Sp. z o.o. · ul. Prosta 20, 00-850 Warszawa</span>
+            <span>MedOptio · 4778 Park Street, Dunakeszi, Pest (PE) 2120, Hungary</span>
           </div>
         </div>
         <DemoForm />

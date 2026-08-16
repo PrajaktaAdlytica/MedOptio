@@ -111,7 +111,7 @@ export default function FundingAnnouncementPage() {
         <div className="news-body">
           <div className="news-article-label">
             <Building2 size={18} />
-            <span>Warszawa, Poland</span>
+            <span>Dunakeszi, Hungary</span>
           </div>
 
           <p className="news-lead">

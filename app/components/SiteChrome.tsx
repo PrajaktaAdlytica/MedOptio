@@ -102,13 +102,13 @@ export function SiteFooter() {
           <Mail size={15} />
           hello@medoptio.com
         </a>
-        <a href="tel:+48221030240">
+        <a href="tel:+36186158582">
           <Phone size={15} />
-          +48 22 103 02 40
+          06 18 615 8582
         </a>
         <span>
           <MapPin size={15} />
-          ul. Prosta 20, 00-850 Warszawa
+          4778 Park Street, Dunakeszi, Pest (PE) 2120, Hungary
         </span>
         <Link href="/sign-in">Sign in</Link>
       </div>
